@@ -1,17 +1,18 @@
-Analyzing Sprezzatura in Monteverdi's Madrigals: The Seconda Pratica
-Project Overview
+# Analyzing Sprezzatura in Monteverdi's Madrigals: 
+## The Seconda Pratica
+### Project Overview
 This project analyzes Claudio Monteverdi's Book 5 of Madrigals (with a primary focus on Cruda Amarilli) to find empirical, notational evidence of sprezzatura. Historically, sprezzatura in the Seconda Pratica was not a generalized rhythmic freedom, but rather a speech-like delivery (canto) where vocal lines are rhythmically displaced against a strict, unyielding tactus.
 
 By separating the Basso Continuo (the tactus anchor) from the upper vocal lines, this Python workflow identifies instances where voices enter on off-beats against a held bass note, effectively mapping the composer's written-out emotional friction.
 
-Dataset Acknowledgment
+### Dataset Acknowledgment
 The data driving this analysis is extracted from the open-source Monteverdi Madrigals Corpus compiled by the Digital and Cognitive Musicology Lab (DCMLab).
 
 Source Repository: https://github.com/DCMLab/monteverdi_madrigals
 
 Format: The scores are parsed using the ms3 library, which extracts MuseScore 3.6.2 files into tabular .tsv formats representing notes, chords, measures, and harmonies.
 
-Workflow and Methodology
+### Workflow and Methodology
 1. Environment Setup and Data Loading
 The pipeline begins by cloning the DCMLab repository and utilizing the ms3 parser and pandas to load the TSV files. The data is filtered specifically to extract Book 5, the landmark publication where Monteverdi explicitly defended the Seconda Pratica.
 
@@ -29,11 +30,8 @@ The core algorithm iterates through the vocal lines to find syncopations and ant
 4. Mapping Lyrics to Displacements
 Because sprezzatura is a technique designed to serve the oration and the affetto (passion) of the text, the final step cross-references the rhythmic displacements with the chords dataset. This extracts the exact poetic syllables sung on the displaced notes, revealing which specific words Monteverdi chose to emphasize.
 
-Requirements
-Python 3.11+
-
-ms3 (>= 2.6.0)
-
-pandas (>= 2.0.0)
-
-jupyterlab
+### Requirements
+- Python 3.11+
+- ms3 (>= 2.6.0)
+- pandas (>= 2.0.0)
+- jupyterlab
