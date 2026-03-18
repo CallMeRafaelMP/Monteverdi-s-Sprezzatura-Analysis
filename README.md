@@ -3,7 +3,7 @@
 This repository contains a computational analysis of Claudio Monteverdi’s nine books of madrigals. The project tracks the shift from the Renaissance polyphonic tradition (**Prima Pratica**) to the early Baroque emphasis on monody and harmonic support (**Seconda Pratica**).
 
 ## 📂 Data Source
-The musical scores used in this analysis were extracted and cleaned from the **Choral Public Domain Library (CPDL)**.
+The musical scores used in this analysis were extracted and cleaned from the **Choral Public Domain Library**.
 
 > Choral Public Domain Library, “Claudio Monteverdi,” ChoralWiki, 2022. [Online]. Available: [https://www.cpdl.org/wiki/index.php/Claudio_Monteverdi](https://www.cpdl.org/wiki/index.php/Claudio_Monteverdi)
 
@@ -42,7 +42,7 @@ The results clearly delineate the boundary between the "Two Practices."
 - **Books 5–9:** Show a significant increase in Basso "pedal" behavior, higher dissonance counts on specific emotive keywords, and the emergence of the *Stile Concitato* as a primary structural device.
 
 ---
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 * Python 3.8+
