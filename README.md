@@ -1,37 +1,57 @@
-# Analyzing Sprezzatura in Monteverdi's Madrigals: 
-## The Seconda Pratica
-### Project Overview
-This project analyzes Claudio Monteverdi's Book 5 of Madrigals (with a primary focus on Cruda Amarilli) to find empirical, notational evidence of sprezzatura. Historically, sprezzatura in the Seconda Pratica was not a generalized rhythmic freedom, but rather a speech-like delivery (canto) where vocal lines are rhythmically displaced against a strict, unyielding tactus.
+# Monteverdi's Madrigals - A Statistical Analysis
 
-By separating the Basso Continuo (the tactus anchor) from the upper vocal lines, this Python workflow identifies instances where voices enter on off-beats against a held bass note, effectively mapping the composer's written-out emotional friction.
+This repository contains a computational analysis of Claudio Monteverdi’s nine books of madrigals. The project tracks the shift from the Renaissance polyphonic tradition (**Prima Pratica**) to the early Baroque emphasis on monody and harmonic support (**Seconda Pratica**).
 
-### Dataset Acknowledgment
-The data driving this analysis is extracted from the open-source Monteverdi Madrigals Corpus compiled by the Digital and Cognitive Musicology Lab (DCMLab).
+## 📊 Analysis Overview
 
-Source Repository: https://github.com/DCMLab/monteverdi_madrigals
+The study focuses on three primary musical dimensions:
+1.  **The Evolution of the Basso Role**: Measuring the transition from melodic counterpoint to harmonic "pedal" support.
+2.  **Dissonance & Madrigalisms**: Reconstructing full lyrics to identify which words (e.g., *morire*, *dolce*, *cruda*) Monteverdi most frequently paired with vertical dissonances.
+3.  **Formalizing Sprezzatura**: A heuristic-based approach to finding "hotspots" of expressive freedom (*tempo dell'animo*) where the upper voices defy strict rhythm over a stable bass.
 
-Format: The scores are parsed using the ms3 library, which extracts MuseScore 3.6.2 files into tabular .tsv formats representing notes, chords, measures, and harmonies.
+---
 
-### Workflow and Methodology
-1. Environment Setup and Data Loading
-The pipeline begins by cloning the DCMLab repository and utilizing the ms3 parser and pandas to load the TSV files. The data is filtered specifically to extract Book 5, the landmark publication where Monteverdi explicitly defended the Seconda Pratica.
+## 🛠 Methodology
 
-2. Extracting the Tactus Framework
-To measure rhythmic displacement, the score is split into two distinct layers:
+The analysis is powered by `music21` and custom Python heuristics. The core logic is divided into two primary analytical pipelines:
 
-The Basso Continuo (Anchor): The lowest staff in the score, acting as the mathematical, stable tactus.
+### 1. Dissonance & Text Mapping
+* **`build_note_to_word_map()`**: Reconstructs full Italian words from fragmented MusicXML syllables, allowing for accurate text-to-music alignment.
+* **`analyze_dissonant_words()`**: Scans vertical chords across all parts. If a chord is dissonant and contains more than two pitch classes, the function captures the specific word being sung.
 
-The Vocal Lines (Sprezzatura Layer): The upper staves carrying the text.
-The script calculates both a local_offset (the beat's position within a specific measure) and a general_offset (an absolute timeline from the beginning of the piece) to plot events chronologically.
+### 2. Heuristic Sprezzatura Finder
+The function **`find_all_sprezzatura()`** evaluates measures on a **0–10 scale** based on the following weights:
 
-3. Identifying Rhythmic Displacements
-The core algorithm iterates through the vocal lines to find syncopations and anticipations. It specifically flags fractional metrical positions (off-beats) where the Basso Continuo is holding a steady note without attacking a new one. This friction between the voice and the bass is the structural footprint of sprezzatura.
+| Points | Heuristic | Description |
+| :--- | :--- | :--- |
+| **+2** | **Sustained Bass Pedal** | Basso notes with a duration $\ge$ 2.0 quarter lengths (Support role). |
+| **+3** | **Stile Concitato** | Rapid repeated-note declamation in vocal parts. |
+| **+5** | **Dissonant Lyrics** | Syllables landing on unprepared or unresolved vertical dissonances. |
 
-4. Mapping Lyrics to Displacements
-Because sprezzatura is a technique designed to serve the oration and the affetto (passion) of the text, the final step cross-references the rhythmic displacements with the chords dataset. This extracts the exact poetic syllables sung on the displaced notes, revealing which specific words Monteverdi chose to emphasize.
+---
 
-### Requirements
-- Python 3.11+
-- ms3 (>= 2.6.0)
-- pandas (>= 2.0.0)
-- jupyterlab
+## 📈 Key Findings
+
+### The Basso Role
+As Monteverdi moved toward the *Seconda Pratica* (Books 5–9), the bass line's **Average Duration** increased significantly, signaling a move away from melodic equality toward a "Harmonic Pedal" function. Simultaneously, the **Leap Ratio** (movement by leap vs. step) fluctuates, reflecting the emergence of the *Basso Continuo* as a functional harmonic driver.
+
+### Dissonance Trends
+* **Book 1** shows a high ratio of unprepared dissonance (0.47), likely due to experimental "madrigalisms."
+* **Book 8 (*Guerrieri, et Amorosi*)** marks the peak of **Stile Concitato**, with a massive spike in rapid repeated notes per piece compared to the earlier books.
+
+### Sprezzatura Hotspots
+In "Cruda Amarilli" (Book 5, Measure 1), the algorithm identifies perfect scores of **10/10**, where sustained bass pedals anchor aggressive vocal declamations on highly dissonant words—quantifying the "expressive freedom" Caccini termed *Tempo dell'animo*.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* Python 3.8+
+* `music21`, `pandas`, `seaborn`, `matplotlib`
+
+### Installation
+```bash
+git clone [https://github.com/your-repo/monteverdi-analysis.git](https://github.com/your-repo/monteverdi-analysis.git)
+cd monteverdi-analysis
+pip install -r requirements.txt
