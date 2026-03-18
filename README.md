@@ -2,48 +2,46 @@
 
 This repository contains a computational analysis of Claudio Monteverdi’s nine books of madrigals. The project tracks the shift from the Renaissance polyphonic tradition (**Prima Pratica**) to the early Baroque emphasis on monody and harmonic support (**Seconda Pratica**).
 
-## 📊 Analysis Overview
+## 📂 Data Source
+The musical scores used in this analysis were extracted and cleaned from the **Choral Public Domain Library (CPDL)**.
 
-The study focuses on three primary musical dimensions:
-1.  **The Evolution of the Basso Role**: Measuring the transition from melodic counterpoint to harmonic "pedal" support.
-2.  **Dissonance & Madrigalisms**: Reconstructing full lyrics to identify which words (e.g., *morire*, *dolce*, *cruda*) Monteverdi most frequently paired with vertical dissonances.
-3.  **Formalizing Sprezzatura**: A heuristic-based approach to finding "hotspots" of expressive freedom (*tempo dell'animo*) where the upper voices defy strict rhythm over a stable bass.
+> Choral Public Domain Library, “Claudio Monteverdi,” ChoralWiki, 2022. [Online]. Available: [https://www.cpdl.org/wiki/index.php/Claudio_Monteverdi](https://www.cpdl.org/wiki/index.php/Claudio_Monteverdi)
+
+## 🧪 Methodology
+
+The analysis is built on a custom heuristic framework that processes MusicXML/MXL files to extract lyrical and musicological data.
+
+### 1. Textual Reconstruction & Dissonance Mapping
+Because MusicXML fragments lyrics into syllables, the project uses a reconstruction engine to map vertical harmonic events to full words.
+* `build_note_to_word_map()`: Iterates through vocal parts to reconstruct full Italian words (e.g., "A-ma-ril-li") and maps every note object to its parent word.
+* `analyze_dissonant_words()`: Identifies vertical chords with 3+ unique pitch classes. If the chord is mathematically dissonant, it records the specific word being sung, allowing us to visualize Monteverdi's "dissonance vocabulary" across different books.
+
+### 2. The Sprezzatura & Concitato Heuristic
+We formalize the elusive concept of *Sprezzatura* (expressive rhythmic freedom) and *Stile Concitato* (the "excited style") using a weighted scoring system (0–10 points) per measure:
+
+* **Basso Support (+2 pts):** Identifies measures where the bass acts as a harmonic anchor (pedal notes/long durations $\ge$ 2.0).
+* **Stile Concitato (+3 pts):** Scans for rapid, repeated-pitch declamation (semiquaver/quaver pulses) in the vocal lines, a hallmark of Monteverdi's later dramatic works.
+* **Dissonant Word Stress (+5 pts):** Triggered when a reconstructed "meaningful" word lands on a non-consonant vertical stack.
+
+## 📊 Key Analytical Features
+
+### The Evolution of the Basso
+The project tracks the transition of the Basso from a melodic participant in a polyphonic web to a functional **Basso Continuo**. Metrics include:
+* **Average Note Duration:** Increasing as the bass becomes more foundational.
+* **Leap Ratio:** Analyzing the angularity of the bass line vs. its scalar movement.
+
+### Dissonance & Madrigalisms
+By analyzing the "Top Dissonant Words," the study reveals how Monteverdi’s use of "harsh" harmonies moved from traditional poetic triggers (*morte*, *dolore*) to more abstract expressive choices in the *Seconda Pratica*.
+
+### Stile Concitato Analysis
+The analysis highlights the spike in "agitated" textures in Book 8 (*Madrigali guerrieri, et amorosi*), quantifying the frequency of rapid rhythmic repetitions used to depict anger or bellicose energy.
+
+## 📈 Summary of Results
+The results clearly delineate the boundary between the "Two Practices." 
+- **Books 1–4:** Characterized by higher melodic equality and lower "Sprezzatura" scores.
+- **Books 5–9:** Show a significant increase in Basso "pedal" behavior, higher dissonance counts on specific emotive keywords, and the emergence of the *Stile Concitato* as a primary structural device.
 
 ---
-
-## 🛠 Methodology
-
-The analysis is powered by `music21` and custom Python heuristics. The core logic is divided into two primary analytical pipelines:
-
-### 1. Dissonance & Text Mapping
-* **`build_note_to_word_map()`**: Reconstructs full Italian words from fragmented MusicXML syllables, allowing for accurate text-to-music alignment.
-* **`analyze_dissonant_words()`**: Scans vertical chords across all parts. If a chord is dissonant and contains more than two pitch classes, the function captures the specific word being sung.
-
-### 2. Heuristic Sprezzatura Finder
-The function **`find_all_sprezzatura()`** evaluates measures on a **0–10 scale** based on the following weights:
-
-| Points | Heuristic | Description |
-| :--- | :--- | :--- |
-| **+2** | **Sustained Bass Pedal** | Basso notes with a duration $\ge$ 2.0 quarter lengths (Support role). |
-| **+3** | **Stile Concitato** | Rapid repeated-note declamation in vocal parts. |
-| **+5** | **Dissonant Lyrics** | Syllables landing on unprepared or unresolved vertical dissonances. |
-
----
-
-## 📈 Key Findings
-
-### The Basso Role
-As Monteverdi moved toward the *Seconda Pratica* (Books 5–9), the bass line's **Average Duration** increased significantly, signaling a move away from melodic equality toward a "Harmonic Pedal" function. Simultaneously, the **Leap Ratio** (movement by leap vs. step) fluctuates, reflecting the emergence of the *Basso Continuo* as a functional harmonic driver.
-
-### Dissonance Trends
-* **Book 1** shows a high ratio of unprepared dissonance (0.47), likely due to experimental "madrigalisms."
-* **Book 8 (*Guerrieri, et Amorosi*)** marks the peak of **Stile Concitato**, with a massive spike in rapid repeated notes per piece compared to the earlier books.
-
-### Sprezzatura Hotspots
-In "Cruda Amarilli" (Book 5, Measure 1), the algorithm identifies perfect scores of **10/10**, where sustained bass pedals anchor aggressive vocal declamations on highly dissonant words—quantifying the "expressive freedom" Caccini termed *Tempo dell'animo*.
-
----
-
 ## 🚀 Getting Started
 
 ### Prerequisites
