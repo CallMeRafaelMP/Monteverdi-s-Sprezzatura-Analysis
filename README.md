@@ -38,7 +38,7 @@ The analysis highlights the spike in "agitated" textures in Book 8 (*Madrigali g
 
 ## 📈 Summary of Results
 The results clearly delineate the boundary between the "Two Practices." 
-- **Books 1–4:** Characterized by higher melodic equality and lower "Sprezzatura" scores.
+- **Books 1–4:** Characterized by following the Contrappunto rules.
 - **Books 5–9:** Show a significant increase in Basso "pedal" behavior, higher dissonance counts on specific emotive keywords, and the emergence of the *Stile Concitato* as a primary structural device.
 
 ---
