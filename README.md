@@ -2,12 +2,12 @@
 
 This repository contains a computational analysis of Claudio Monteverdi’s nine books of madrigals. The project tracks the shift from the Renaissance polyphonic tradition (**Prima Pratica**) to the early Baroque emphasis on monody and harmonic support (**Seconda Pratica**).
 
-## 📂 Data Source
+## Data Source
 The musical scores used in this analysis were extracted and cleaned from the **Choral Public Domain Library**.
 
 > Choral Public Domain Library, “Claudio Monteverdi,” ChoralWiki, 2022. [Online]. Available: [https://www.cpdl.org/wiki/index.php/Claudio_Monteverdi](https://www.cpdl.org/wiki/index.php/Claudio_Monteverdi)
 
-## 🧪 Methodology
+## Methodology
 
 The analysis is built on a custom heuristic framework that processes MusicXML/MXL files to extract lyrical and musicological data.
 
@@ -23,7 +23,7 @@ We formalize the elusive concept of *Sprezzatura* (expressive rhythmic freedom) 
 * **Stile Concitato (+3 pts):** Scans for rapid, repeated-pitch declamation (semiquaver/quaver pulses) in the vocal lines, a hallmark of Monteverdi's later dramatic works.
 * **Dissonant Word Stress (+5 pts):** Triggered when a reconstructed "meaningful" word lands on a non-consonant vertical stack.
 
-## 📊 Key Analytical Features
+## Key Analytical Features
 
 ### The Evolution of the Basso
 The project tracks the transition of the Basso from a melodic participant in a polyphonic web to a functional **Basso Continuo**. Metrics include:
@@ -36,7 +36,7 @@ By analyzing the "Top Dissonant Words," the study reveals how Monteverdi’s use
 ### Stile Concitato Analysis
 The analysis highlights the spike in "agitated" textures in Book 8 (*Madrigali guerrieri, et amorosi*), quantifying the frequency of rapid rhythmic repetitions used to depict anger or bellicose energy.
 
-## 📈 Summary of Results
+## Summary of Results
 The results clearly delineate the boundary between the "Two Practices." 
 - **Books 1–4:** Characterized by following the Contrappunto rules.
 - **Books 5–9:** Show a significant increase in Basso "pedal" behavior, higher dissonance counts on specific emotive keywords, and the emergence of the *Stile Concitato* as a primary structural device.
